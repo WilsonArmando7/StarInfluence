@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="card" *ngFor="let influencer of influencers">
+    <!-- Imagen -->
+    <img [src]="influencer.foto" [alt]="influencer.nombre">
+
+    <!-- Nombre y descripción -->
+    <h3>{{ influencer.nombre }}</h3>
+    <p>{{ influencer.descripcion }}</p>
+
+    <!-- Botones de voto -->
+    <div class="botones">
+      <button class="btn-si" (click)="votarSi(influencer)">✅ Grato ({{ influencer.votosSi }})</button>
+      <button class="btn-no" (click)="votarNo(influencer)">❌ No Grato ({{ influencer.votosNo }})</button>
+    </div>
+
+    <!-- Porcentajes -->
+    <p>Grato: {{ obtenerPorcentajeGrato(influencer) | number:'1.0-1' }}%</p>
+    <div class="barra-grato">
+      <div class="relleno-grato"
+           [style.width.%]="obtenerPorcentajeGrato(influencer)">
+      </div>
+    </div>
+
+    <p>No Grato: {{ obtenerPorcentajeNoGrato(influencer) | number:'1.0-1' }}%</p>
+    <div class="barra-nograto">
+      <div class="relleno-nograto"
+           [style.width.%]="obtenerPorcentajeNoGrato(influencer)">
+      </div>
+    </div>
+
+    <!-- Enlace a Facebook -->
+    <a class="btn-facebook" [href]="influencer.facebook" target="_blank">🌐 Ver en Facebook</a>
+  </div>
+</div>

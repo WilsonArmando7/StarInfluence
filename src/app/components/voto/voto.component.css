@@ -1,0 +1,239 @@
+/* === FONDO GENERAL === */
+html, body {
+  background-color: #000000 !important;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  justify-items: center;
+  align-items: start;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1300px; /* 🔹 Evita que se estire demasiado en pantallas grandes */
+}
+
+/* === ENCABEZADO === */
+h1 {
+  text-align: center;
+  color: #ff00aa;
+  font-size: 2.5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ff33cc, 0 0 20px #ff33cc;
+}
+
+p {
+  text-align: center;
+  color: #cccccc;
+  font-size: 1.1em;
+  margin-bottom: 30px;
+}
+
+/* === TARJETAS === */
+.card {
+  background: #0a0a0a;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 0 25px rgba(255, 0, 204, 0.3);
+  border: 2px solid transparent;
+  background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                    linear-gradient(90deg, #ff00cc, #00e0ff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 400px; /* 🔹 Para mantener un ancho visual equilibrado */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px rgba(255, 0, 204, 0.6);
+}
+
+/* === IMÁGENES === */
+.card img {
+  width: 100%;
+  height: auto; /* 🔹 Se ajusta automáticamente */
+  max-height: 450px; /* 🔹 Evita imágenes demasiado largas */
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ff00aa;
+  display: block;
+  margin: 0 auto;
+}
+
+/* === NOMBRE DEL INFLUENCER === */
+.card h3 {
+  color: #ff4dc4;
+  margin: 10px 0 5px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+/* === DESCRIPCIÓN === */
+.card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* === BOTONES DE VOTO === */
+.botones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* 🔹 Permite que los botones se acomoden si no caben */
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-si,
+.btn-no {
+  padding: 10px 22px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.95rem;
+}
+
+.btn-si { background-color: #00c853; }
+.btn-si:hover { background-color: #00e676; }
+
+.btn-no { background-color: #f44336; }
+.btn-no:hover { background-color: #ff1744; }
+
+/* === BOTÓN DE FACEBOOK === */
+.btn-facebook {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1877f2;
+  color: white;
+  padding: 10px 18px;
+  margin: 15px auto;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 0.95rem;
+  width: fit-content;
+}
+.btn-facebook:hover {
+  background-color: #0d5edb;
+  transform: scale(1.05);
+}
+.btn-facebook::before {
+  content: "📘";
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+/* === Barras de porcentaje === */
+.porcentaje {
+  width: 100%;
+  margin-top: 8px;
+  text-align: center;
+}
+.barra {
+  width: 100%;
+  height: 10px;
+  background-color: #222;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+.relleno-grato {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88, #00ccff);
+  transition: width 0.4s ease;
+}
+.relleno-no {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4d4d, #ff0000);
+  transition: width 0.4s ease;
+}
+
+/* === ENCABEZADO HERO === */
+.hero {
+  text-align: center;
+  margin: 40px 0 20px 0;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 0 0 15px #ff00cc;
+}
+.titulo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff00cc, #00e0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  text-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+}
+.trebol {
+  text-shadow: 0 0 25px #00ff88;
+}
+.subtitulo {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-top: 10px;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .card img {
+    max-height: 380px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 10px;
+  }
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    padding: 0;
+  }
+  .card {
+    max-width: 95%;
+  }
+  .card img {
+    max-height: 320px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .titulo {
+    font-size: 2rem;
+  }
+  .subtitulo {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="admin-panel">
+  <h1>📊 Panel de Administración</h1>
+  <p>Bienvenido, administrador. Aquí puedes ver las estadísticas en tiempo real.</p>
+
+  <div class="card">
+    <h2>👁️ Total de visitas a la aplicación</h2>
+
+    <!-- ✅ Mostrar número si hay datos, o "Cargando..." si aún no -->
+    <h3 *ngIf="totalVisitas !== null; else cargando">
+      {{ totalVisitas }}
+    </h3>
+
+    <!-- ✅ Plantilla alternativa mientras se cargan los datos -->
+    <ng-template #cargando>
+      <h3>Cargando...</h3>
+    </ng-template>
+  </div>
+
+  <!-- ✅ Contenedor del gráfico -->
+  <div class="chart-container">
+    <canvas id="visitasChart"></canvas>
+  </div>
+</div>
+
+
