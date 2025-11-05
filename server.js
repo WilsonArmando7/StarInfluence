@@ -10,31 +10,40 @@ const __dirname = path.dirname(__filename);
 
 // ✅ Configuración inicial
 const app = express();
-const PORT = process.env.PORT || 3000;
+// Railway ya proporciona la variable PORT, si no la encuentra usa 3000
+const PORT = process.env.PORT || 3000; 
 
 app.use(cors());
 app.use(express.json());
 
-// ✅ Conexión MySQL (Usando los valores que estaban en el código funcional)
+// ------------------------------------
+// ✅ Conexión MySQL CORREGIDA (Usando VARIABLES DE ENTORNO de Railway)
+// ------------------------------------
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "votaciones"
+    host: process.env.DB_HOST,     // Usando 'switchback.proxy.rlwy.net'
+    user: process.env.DB_USER,     // Usando 'root'
+    password: process.env.DB_PASS, // Usando la contraseña generada
+    database: process.env.DB_NAME, // Usando 'railway'
+    port: process.env.DB_PORT      // Usando '46144'
 });
 
 db.connect((err) => {
     if (err) {
-        console.error("❌ Error al conectar con MySQL:", err);
-        // Opcional: Cerrar el proceso si la conexión a DB es crítica
-        // process.exit(1); 
+        // Mostrar TODAS las variables para un mejor diagnóstico si falla
+        console.error("❌ Error al conectar con MySQL. Verifique variables:", {
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            database: process.env.DB_NAME,
+            port: process.env.DB_PORT
+        });
+        console.error(err);
     } else {
-        console.log("✅ Conexión exitosa con MySQL.");
+        console.log("✅ Conexión exitosa con MySQL usando variables de entorno.");
     }
 });
 
 // ------------------------------------
-// ✅ Rutas de la API
+// ✅ Rutas de la API (Sin cambios)
 // ------------------------------------
 
 // ✅ RUTA PRINCIPAL
@@ -55,6 +64,7 @@ app.get("/influencers", (req, res) => {
     db.query("SELECT * FROM influencers", (err, results) => {
         if (err) {
             console.error("❌ Error al obtener datos:", err);
+            // El error 500 ahora es más probable que sea por la tabla 'influencers' no encontrada
             res.status(500).json({ error: "Error al obtener influencers" });
         } else {
             res.json(results);
@@ -107,7 +117,6 @@ app.get("/total-visitas", (req, res) => {
             console.error("❌ Error al obtener visitas:", err);
             res.status(500).json({ error: "Error al obtener visitas" });
         } else {
-            // results es un array, results[0] contiene { total: N }
             res.json(results[0]);
         }
     });
@@ -118,7 +127,6 @@ app.get("/total-visitas", (req, res) => {
 // ------------------------------------
 
 // ✅ Servir los archivos estáticos del build de Angular
-// Asegúrate de que el path 'dist/star-influence/browser' sea correcto para tu proyecto
 app.use(express.static(path.join(__dirname, "dist/star-influence/browser")));
 
 // ✅ Redirigir cualquier otra ruta no API al index.html de Angular (para routing de SPA)
@@ -131,5 +139,5 @@ app.use((req, res) => {
 // ------------------------------------
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-    console.log(`🌐 Entorno: ${process.env.NODE_ENV || 'Desarrollo'}`);
+    console.log(`🌐 Entorno: ${process.env.NODE_ENV || 'Producción Railway'}`);
 });
