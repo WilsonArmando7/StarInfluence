@@ -4,6 +4,26 @@ import mysql from "mysql2";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import mysql from 'mysql2';
+
+
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});
+
+connection.connect(err => {
+  if (err) {
+    console.error('❌ Error de conexión:', err);
+  } else {
+    console.log('✅ Conectado a la base de datos correctamente');
+  }
+});
+
+export default connection;
 
 // ✅ Definir __dirname correctamente (ESM no lo trae por defecto)
 const __filename = fileURLToPath(import.meta.url);
